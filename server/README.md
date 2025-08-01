@@ -24,8 +24,8 @@ $ ./request-certbot-wildcard.sh
 
 ```
 $ export DOMAIN=testing.example.org
-$ sed "s/DOMAIN/$DOMAIN/g" templates/001-testproxy-root.conf > /etc/apache2/sites-available/001-testproxy-root.conf
-$ a2ensite 001-testproxy-root.conf
+$ sed "s/DOMAIN/$DOMAIN/g" templates/001-testing-root.conf > /etc/apache2/sites-available/001-testing-$DOMAIN-root.conf
+$ a2ensite 001-testing-$DOMAIN-root.conf
 $ systemctl apache2 restart
 ```
 
