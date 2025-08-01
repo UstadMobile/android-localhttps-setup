@@ -33,19 +33,20 @@ $ systemctl apache2 restart
 
 ## Generate bundle for running https locally
 
+Request a certificate for a localdev subdomain that will run locally (e.g. localdev.testing.example.org):
 ```
 $ export DOMAIN=testing.example.org
 $ export EMAIL=info@example.org
 $ ./request-certbot-subdomain.sh
 ```
 
-This will request a certificate for localdev.$DOMAIN .
-
+Generate a bundle that can then be installed on a developer laptop:
 ```
 export DOMAIN=testing.example.org
 $ ./make-subdomain-bundle.sh
 ```
-
+This generates a .zip to be copied to the developer's laptop containing the https certificate, key, Apache config and a 
+simple .sh install script.
 
 
 ## Continuous integration server setup
