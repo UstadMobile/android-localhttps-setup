@@ -3,7 +3,7 @@
 HTTPS is required for (and thus to fully test):
 
 * [App links](https://developer.android.com/training/app-links/verify-android-applinks)
-* Passkeys
+* [Passkeys](https://developer.android.com/identity/sign-in/credential-manager#create-passkey)
 
 Passkeys are now the recommended way to signup users - great! But how can you test run these app
 components on your laptop now? App links can be manually enabled through app settings, but there's 
@@ -51,61 +51,10 @@ asset_statements.xml:
   DNS server. This allows Android devices on the same WiFi network to connect to the developer's laptop 
   using https.
 
+**To use**:
 
-See server and devlaptop folders for instructions.
+* First setup the [server](server/)
+* Then setup [developer's laptop](devlaptop/)
 
-
-
-
-
-These scripts are written for Ubuntu Linux (probably fine on similar distros). This is example is written where:
-* 192.168.1.5 is the IP address of the developer's laptop
-* testproxy.devserver3.ustadmobile.com is the 'top' domain that is used to host the assetlinks.json
-  file
-* localdev.testproxy.devserver3.ustadmobile.com is the subdomain used for local developers to run
-  https
-
-The system works as follows:
-* A test domain/subdomain is setup (e.g. testproxy.devserver3.ustadmobile.com). The assetlinks include
-  the SHA-256 fingerprint used on any APK that is going to be tested. This makes the assetlinks.json
-  accessible ( e.g. ```https://testproxy.devserver3.ustadmobile.com/.well-known/assetlinks.json```
-  accessible from the public internet as required). The test domain is setup using a wildcard SSL
-  certificate (e.g. from certbot or other public registry).
-```
-* The APK asset_statements includes the link to assetlinks.json e.g.
-
-
-Local development setup:
-
-Local development is done by having the developer download and setup an https certificate for a 
-specific subdomain (e.g. localdev.testproxy.devserver3.ustadmobile.com ) on their laptop. 
-
-
-
-Manual instructions:
-
-* Use with emulator: Add the domain to /etc/hosts e.g.
-```
-192.168.1.5 localdev.testproxy.devserver3.ustadmobile.com
-```
-* Device: this is handled by installing DNSMasq DNS server on the developer's laptop and then 
-  setting the developer laptop's IP address as the DNS server for the WiFi network.
-  * Install dnsmasq ```apt-get install dnsmasq```
-  * In ```/etc/dnsmasq.conf```
-    * Uncomment ```strict-order```, ```bind-interfaces```, ```no-resolv```.
-    * Under ```no-resolv``` add ```server=127.0.0.53``` - this uses Ubuntu's systemd-resolved as the
-      the upstream DNS server.
-    * Set listen-address to the IP address of the developer's laptop ```listen-address=```
-  * Create a new file ```/etc/dnsmasq.d/localdev.conf``` to specify the IP address for 
-    the local https testing domain e.g.
-    ```address=/localdev1.testproxy.devserver3.ustadmobile.com/192.168.1.5```
-  * Restart dnsmasq ```sudo systemctl restart dnsmasq```
-  * Test it: running ```dig @192.168.1.5 google.com``` should resolve as usual. Running 
-    ```dig @192.168.1.5 localdev1.testproxy.devserver3.ustadmobile.com``` should return the IP
-    address 192.168.1.5
-  * On the Android device: go to WiFi settings, change IP settings from DHCP to static, and set the
-    DNS address to 192.168.1.5 .
-Android's verification of assetlinks.json includes the use of Google's cache - so using any 
-self-signed certificate is not possible.
 
 
