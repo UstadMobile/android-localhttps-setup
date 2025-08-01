@@ -7,7 +7,7 @@ sudo a2enmod ssl
 sudo systemctl restart apache2
 ```
 
-* Generate the bundle for running https locally on the [server](../server/] and copy the .zip to the developer's laptop.
+* Generate the bundle for running https locally on the [server](../server/) and copy the .zip to the developer's laptop.
 * Unzip and run install script to copy files into place:
 
 ```

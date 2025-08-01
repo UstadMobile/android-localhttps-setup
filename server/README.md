@@ -18,7 +18,7 @@ $ export DOMAIN=testing.example.org
 $ export EMAIL=info@example.org
 $ ./request-certbot-wildcard.sh
 ```
-* 
+
 * Copy assetlinks.json to the HTTP directory such that it can be loaded from ```https://testing.example.org/.well-known/assetlinks.json```
 * Add an Apache virtual host for testing.example.org :
 
