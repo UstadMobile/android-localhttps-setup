@@ -57,8 +57,9 @@ be accessed over https such that ```https://8070.testing.example.org``` is proxi
 A script can be used to generate virtual hosts for a range of ports (e.g. ten or so) such that a single server can
 run tests in parallel.
 
+e.g. to generate configuration for 10 virtual hosts from 8070 until 8079:
 ```
-./make-testproxy-conf.sh
+./make-testproxy-conf.sh 8070 8079
 ```
 
 
