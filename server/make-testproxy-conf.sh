@@ -4,7 +4,7 @@ FROMPORT=$1
 TOPORT=$2
 
 if [ "$OUTPUT" == "" ]; then
-   OUTPUT=/etc/apache2/sites-available/testproxy-DOMAIN.conf
+   OUTPUT=/etc/apache2/sites-available/testproxy-$DOMAIN.conf
 fi
 
 
